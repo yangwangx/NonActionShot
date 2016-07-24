@@ -1,0 +1,129 @@
+README file for ActionThread dataset
+Written Minh Hoai Nguyen and Yang Wang
+Last updated: 20 Jun 2016
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. ./videos/
+
+	In this folder, we have 4,757 video clips extracted from 15 different TV series.
+	Each video clip might correspond to an action, no action, or multiple actions ('hug', 'kiss', etc).
+
+	A typical video filename is '039341.mp4'. '039341' is the 6-digit id for this video,
+	'.mp4' is the format for all the videos in our dataset.
+
+3. ./anno/
+
+	In this folder, we have one annotation file for each video.
+	>> load 039341.mat
+
+	(1) clip info
+		+ clip, records info about the orginal movie and extracted clip.
+		+ nFrm = 685, is the number of frames;
+		+ [acStart, acEnd] = [251, 434], is the start/end frame for 'action clip';
+		+ [eacStart, eacEnd] = [201, 484], is the start/end frame for 'extended ac', notice this extends 'ac';
+
+	(2) clip structure
+		+ shots, denotes the start/end frame for each shot;
+		+ threads, denotes the shot_ids included for each threads;
+		+ segs, denotes the start/end frame for each segment. Each segment is a shot or a part of a shot.
+		Segs are obtained by shots by having additional split points which are eac/ac boundaries;
+
+	(3) clip annotation
+		+ anno4segs, is the annotation of action existence in each segment, collected using Amazon mTurk.
+
+		For video 039341, we have 9 segments. Using scipt info, we know it might contain action 'eat'.
+		anno4segs.eat = {'001001110'  '000001110'  '000001110'}.
+		'1' means the user think this segment contains action 'eat'; '0' otherwise.
+		We use majority vote to determine the final label for each segment.
+
+		+ Notice that, some videos have annotations for multiple actions.
+		The number of voters varies for different videos.
+
+3. ./frames_tar/ and ./frames_sameFfmpegVideos_tar
+
+	These directories contain low-resolution frames that correspond to
+	the videos in ./video/. In each directory, there is one tar file
+	for each video in ./videos/. For example, '039341.tar' contains
+	'frm_000001.jpg' upto 'frm_000685.jpg'. The original extracted
+	frames are huge, so they are downsampled to save space. These
+	frames can be used for references.
+
+	The set of frames might not always be consistent, due to the: i)
+	FFMPEG version, ii) OS, iii) machines. This dataset consists of two
+	sets of frames../frames_tar/ and ./frames_sameFfmpegVideos_tar. The
+	differences are as follows:
+
+		a) ./frames_tar/ are the set of frames that are consistent with
+		the annotation (in ./anno). These frames are also consisten with
+		the gif files in ./shotGifs. So, if the annotation in ./anno
+		says the is an event from frame k to frame m, these indexes
+		refer to the frames in ./frames_tar
+
+		b) MTurk workers were asked to annotate the GIF files, which are
+		consistent with the frames in ./frames_tar/. The video clips had
+		not even been created before the annotation process.
+
+		c) The video clips in ./videos were only extracted from the
+		original long TV episodes when we prepare the release of this
+		dataset. At that moment, we no longer have access to the
+		original FFMPEG binary that we used to extract ./frames_tar/ and
+		./shotGifs/. So we extracted the video clips using a different
+		version of FFMPEG and on a different machine. At the same time,
+		we extracted the frames in ./frames_sameFFmpegVideos_tar/ for
+		reference. So there might be slight inconsistency between in
+		./videos/ and ./frames_sameFFmpegVideos_tar/.
+
+		d) Now, to work with the video clips in ./videos/, you might use
+		FFMPEG to extract original-resolution videos frames. Due to the
+		discrepency between FFMPEG versions and machines, there is no
+		guarantee that these frames are consistent with either
+		./frames_tar/ or ./frames_sameFfmpegVideo_tar/. That means that
+		the annotation given in ./anno/ might not match the sets of
+		frames you have just extracted. For example, the shot boundaries
+		given in ./anno/ might not be the shot boundaries in the new set
+		of frames. Our advice is to use HOG or some other feature
+		representation to align two sets of frames (./frames_tar and
+		newly extracted frames) and then adjust the annotation
+		accordingly.
+
+4. ./shotGifs/:
+	Gif files which MTurk workes were asked to annotate. MTurk workers
+	were not asked to annoate the video clips. Each video clip is a
+	part of a longer episode. Each video clip has start and end time.
+	We did not extract the video clip during the annotate process.
+	Instead, we extract the frames using FFMPEG, create the gif files,
+	one gif file for each video segments in the segs stored in the
+	./anno/. MTurks workes were then asked to label Gif files.
+
+5. .ids4actions.mat
+
+	There are 13 actions in total. Each action has a list of annotated video ids.
+	Notice that they might overlap.
+
+	ids4actions =
+
+	    answerphone: {1x237 cell}
+	       drivecar: {1x171 cell}
+	            eat: {1x313 cell}
+	          fight: {1x383 cell}
+	      getoutcar: {1x159 cell}
+	      shakehand: {1x181 cell}
+	            hug: {1x442 cell}
+	           kiss: {1x788 cell}
+	            run: {1x1445 cell}
+	        sitdown: {1x459 cell}
+	          situp: {1x133 cell}
+	        standup: {1x282 cell}
+	       highfive: {1x53 cell}
+
+6. .NonAction.mat
+
+         This includes the train/test split information & the shot-level annotation for the train/test videos.
+         
+         + NonAction.classes, lists 13 action categories;
+         + NonAction.train.video, lists the training videos;
+         + NonAction.train.label, contains the action labels for training videos;
+         + NonAction.train.shots, contains the shot structures (start/end frame) for training videos;
+         + NonAction.train.shotsAnno, contains the shot-level annotations (non-action: 0) for training vdieos ;
+         + NonAction.test.XXX, is similar to NonAction.train.XXX.
+

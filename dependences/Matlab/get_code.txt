@@ -1,0 +1,4 @@
+vlfeat-0.9.20
+liblinear-1.96
+MHLfuncs: https://github.com/minhhoai2/MHLfuncs
+ 

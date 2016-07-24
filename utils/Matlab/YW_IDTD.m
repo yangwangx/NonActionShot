@@ -6,7 +6,7 @@ classdef YW_IDTD
 
     properties (Constant)
         % Based on Improved DTD, ICCV13 paper of Heng Wang and Cordelia Schmid
-        denseTrackBin ='/nfs/bigeye/yangwang/NonAction/dependences/C/improved_trajectory/release/m_DenseTrackStab';
+        denseTrackBin ='/nfs/bigeye/yangwang/NonActionShot/dependences/C/improved_trajectory/release/m_DenseTrackStab';
         export_cmd = 'export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/Library/:/usr/local/bin';
     end
         

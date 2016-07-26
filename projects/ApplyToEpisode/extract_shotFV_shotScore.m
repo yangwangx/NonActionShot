@@ -16,8 +16,8 @@ save('./shots/shotFV_unnorm.mat','shotFV','-v7.3');
 %% calculate shot-wise non-action scores
 load('../ActionThread/2.ClassifyNonAction/shotCLF.mat','CLF');
 inFV = fvsNormalize(shotFV);
-% outFV = fvsNormalize(bsxfun(@minus,sum(shotFV,1),inFV));
-outFV = fvsNormalize(filter2(ones(10,1),shotFV)-inFV);
+% outFV = fvsNormalize(bsxfun(@minus,sum(shotFV,1),shotFV));
+outFV = fvsNormalize(filter2(ones(10,1),shotFV)-shotFV);
 shotScore = [inFV,outFV]*CLF.W+CLF.B;
 
 save('./shots/shotScore.mat','shotScore');

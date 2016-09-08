@@ -4,5 +4,6 @@ tar -x improved_trajectory.tar
 rm improved_trajectory.tar
 
 # code for optical flow
-git clone https://github.com/wanglimin/dense_flow
+# not required if not using two stream network
+# git clone https://github.com/wanglimin/dense_flow
 

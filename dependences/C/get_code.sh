@@ -5,5 +5,5 @@ rm improved_trajectory.tar
 
 # code for optical flow
 # not required if not using two stream network
-# git clone https://github.com/wanglimin/dense_flow
+# git clone https://github.com/yangwangx/denseFlow_gpu
 

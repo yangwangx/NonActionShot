@@ -11,7 +11,7 @@ This repository contains:
   -  [shotCLF.mat](https://github.com/yangwangx/NonActionShot/blob/master/projects/ActionThread/2.ClassifyNonAction/shotCLF.mat)
   -  learned from ActionThread  
   -  only based on iDTD + FV, without using CNN features  
-  -  only used [inShot, outShot] to represent a shot, instead of [inShot, outShot, allVideo]; this doesn't affect the performance much.
+  -  only used [inShot, outShot, <del>allVideo</del>] to represent a shot, which doesn't affect the performance.
 
 - code for applying non-action shot classifier onto an entire episode
 

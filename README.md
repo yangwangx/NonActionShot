@@ -16,7 +16,7 @@ This repository contains:
 - code for applying non-action shot classifier onto an entire episode
 
 
-Usage:  
+Usage (in Mac/Linux environment):  
 1. Download this repository  
 2. Download ActionThread using [script](https://github.com/yangwangx/NonActionShot/blob/master/data/get_data.sh)  
 3. Install Matlab dependences listed [here](https://github.com/yangwangx/NonActionShot/blob/master/dependences/Matlab/get_code.txt)  

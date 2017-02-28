@@ -20,5 +20,5 @@ Usage (in Mac/Linux environment):
 1. Download this repository  
 2. Download ActionThread using [script](https://github.com/yangwangx/NonActionShot/blob/master/data/get_data.sh)  
 3. Install Matlab dependences listed [here](https://github.com/yangwangx/NonActionShot/blob/master/dependences/Matlab/get_code.txt)  
-4. Get C dependences using [script](https://github.com/yangwangx/NonActionShot/blob/master/dependences/C/get_code.sh), and compile them correctly.  
+4. Get C dependences using [script](https://github.com/yangwangx/NonActionShot/blob/master/dependences/C/get_code.sh), and compile them correctly. Also, Modify `denseTrackBin` in [./utils/Matlab/YW_IDTD.m](https://github.com/yangwangx/NonActionShot/blob/master/utils/Matlab/YW_IDTD.m) to your own compiled binary.  
 5. Follow the order [here](https://github.com/yangwangx/NonActionShot/tree/master/projects/ActionThread) to repeat experiments   
